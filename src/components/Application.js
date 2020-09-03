@@ -8,7 +8,6 @@ import InterviewerListItem from "./InterviewerListItem";
 
 import {getAppointmentsForDay, getInterview} from '../helpers/selectors';
 
-
 const appointments = [
   {
     id: 1,
