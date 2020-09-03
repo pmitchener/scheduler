@@ -6,7 +6,8 @@ import DayList from "./DayList";
 import Appointment from './Appointment';
 import InterviewerListItem from "./InterviewerListItem";
 
-import getAppointmentsForDay from '../helpers/selectors';
+import {getAppointmentsForDay, getInterview} from '../helpers/selectors';
+
 
 const appointments = [
   {
@@ -94,7 +95,8 @@ export default function Application(props) {
   const [state, setState] = useState({
     day: "Monday",
     days: [],
-    appointments: {}
+    appointments: {},
+    interviewers: {}
   });
 
   const setDay = day => setState({ ...state, day });//spread and overwrite the day key.
@@ -117,24 +119,35 @@ export default function Application(props) {
     Promise.all(
       [
         axios.get('http://localhost:8001/api/days'),
-        axios.get('http://localhost:8001/api/appointments')
+        axios.get('http://localhost:8001/api/appointments'),
+        axios.get('http://localhost:8001/api/interviewers')
       ]
     )
     .then(resultsArray => {
-      console.log("days", resultsArray[0].data);
-      console.log("axios appointments", resultsArray[1].data);
-      setState(prev => ({...prev, days: resultsArray[0].data, appointments: resultsArray[1].data}));
+      setState(prev => (
+        {
+          ...prev, 
+          days: resultsArray[0].data, 
+          appointments: resultsArray[1].data,
+          interviewers: resultsArray[2].data
+        }
+        ));
     })
     .catch(error => {
       console.log(error);
     });
   }, []);
+  //console.log("days", state.days);
+  //console.log("appointments", state.appointments);  
+  //console.log("interviewers", state.interviewers);
   const appointmentList = getAppointmentsForDay(state, state.day).map(item => {
+    const interview = getInterview(state, item.interview);
     return <Appointment
       key={item.id}
-      //time={item.time}
-      //interview={item.interview ? item.interview : undefined}
-      {...item}
+      id={item.id}
+      time={item.time}
+      interview={interview}
+      //{...item}
     />
   })  
   return (
