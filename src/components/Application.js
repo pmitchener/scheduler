@@ -107,7 +107,7 @@ export default function Application(props) {
         ...state.appointments[id],
         interview: { ...interview }
       }; 
-      
+      console.log("saving", appointment);
       axios({
         method: 'put',
         url: `http://localhost:8001/api/appointments/${id}`,
@@ -129,6 +129,28 @@ export default function Application(props) {
     });
   };
   
+  const cancelInterview = (id) => {
+    return new Promise((resolve, reject) => {
+      console.log("cancelInterview From Application level", id);
+      axios({
+        method: 'delete',
+        url: `http://localhost:8001/api/appointments/${id}`,
+      })
+      .then(response => {
+        console.log("Delete from server successfull");
+        //set this appoint to null in state
+        const appointments = {...state.appointments};
+        appointments[id].interview = null;    
+        setState({...state, appointments});
+        resolve(response);
+      })
+      .catch(error => {
+        console.log(error);
+        reject(error);
+      });
+    });
+  };
+
   /*const setDays = days => setState(prev =>({...prev, days}));
 
    useEffect(() => {
@@ -152,6 +174,7 @@ export default function Application(props) {
       ]
     )
     .then(resultsArray => {
+      console.log("appointments", resultsArray[1].data);
       setState(prev => (
         {
           ...prev, 
@@ -180,6 +203,7 @@ export default function Application(props) {
       interview={interview}
       interviewers={interviewersForDay}
       bookInterview={bookInterview}
+      cancelInterview={cancelInterview}
       //{...item}
     />
   });  

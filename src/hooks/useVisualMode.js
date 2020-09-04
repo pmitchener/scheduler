@@ -3,7 +3,8 @@ import {useState} from 'react';
 function useVisualMode(initMode) {
   const [mode, setMode] = useState(initMode);
   const [history, setHistory] = useState([initMode]);
-  
+  const [message, setMessage] = useState("");
+    
   const transition = (newMode, replace = false) => {
     if (replace) {
       //cannot use back() here I think for the same reason mentioned below about mode.
@@ -25,7 +26,11 @@ function useVisualMode(initMode) {
     }
   };
   
-  return {mode, transition, back};
+  const setErrorMessage = (msg) => {
+    setMessage(msg);
+  };
+
+  return {mode, transition, back, message, setErrorMessage};
 }
 
 export default useVisualMode;

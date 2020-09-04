@@ -20,13 +20,14 @@ const Form = props => {
   };
 
   const reset = () => {
+    console.log("Form.reset() called.");
     setName("");
     setInterviewer(null);
   };
 
   const cancel = () => {
-    reset();
-    props.onCancel();
+     reset();
+     props.onCancel();
   };
 
   const save = () => {
