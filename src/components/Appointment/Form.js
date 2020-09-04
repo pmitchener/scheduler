@@ -49,7 +49,7 @@ const Form = props => {
            onChange={handleInput}
           />
         </form>
-        <InterviewerList interviewers={[]} value={interviewer} onChange={onChange} />
+        <InterviewerList interviewers={props.interviewers} value={interviewer} onChange={onChange} />
       </section>
       <section className="appointment__card-right">
         <section className="appointment__actions">

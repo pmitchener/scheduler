@@ -6,7 +6,7 @@ import DayList from "./DayList";
 import Appointment from './Appointment';
 import InterviewerListItem from "./InterviewerListItem";
 
-import {getAppointmentsForDay, getInterview} from '../helpers/selectors';
+import {getAppointmentsForDay, getInterviewersForDay, getInterview} from '../helpers/selectors';
 
 const appointments = [
   {
@@ -94,8 +94,8 @@ export default function Application(props) {
   const [state, setState] = useState({
     day: "Monday",
     days: [],
-    appointments: [],
-    interviewers: []
+    appointments: {},
+    interviewers: {}
   });
 
   const setDay = day => setState({ ...state, day });//spread and overwrite the day key.
@@ -127,8 +127,8 @@ export default function Application(props) {
         {
           ...prev, 
           days: resultsArray[0].data, 
-          appointments: Object.values(resultsArray[1].data),
-          interviewers: Object.values(resultsArray[2].data)
+          appointments: resultsArray[1].data,
+          interviewers: resultsArray[2].data
         }
         ));
     })
@@ -136,9 +136,11 @@ export default function Application(props) {
       console.log(error);
     });
   }, []);
-  console.log("days", state.days);
-  console.log("appointments", state.appointments);  
-  console.log("interviewers", state.interviewers);
+  //console.log("days", state.days);
+  //console.log("appointments", state.appointments);  
+  //console.log("interviewers", state.interviewers);
+  const interviewersForDay = getInterviewersForDay(state, state.day);
+  //console.log("interviewersForDay", interviewersForDay);
   const appointmentList = getAppointmentsForDay(state, state.day).map(item => {
     const interview = getInterview(state, item.interview);
     return <Appointment
@@ -146,9 +148,10 @@ export default function Application(props) {
       id={item.id}
       time={item.time}
       interview={interview}
+      interviewers={interviewersForDay}
       //{...item}
     />
-  })  
+  });  
   return (
     <main className="layout">
       <section className="sidebar">
