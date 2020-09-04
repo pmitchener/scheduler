@@ -99,6 +99,35 @@ export default function Application(props) {
   });
 
   const setDay = day => setState({ ...state, day });//spread and overwrite the day key.
+
+  const bookInterview = (id, interview) => {
+    return new Promise((resolve, reject) => {
+      console.log("From Application level", id, interview);
+      const appointment = {
+        ...state.appointments[id],
+        interview: { ...interview }
+      }; 
+      
+      axios({
+        method: 'put',
+        url: `http://localhost:8001/api/appointments/${id}`,
+        data: appointment
+      })
+      .then(response => {
+        //updating state.
+        const appointments = {
+          ...state.appointments,
+          [id]: appointment
+        };
+        setState({...state, appointments});
+        resolve(response);
+      })
+      .catch(error => {
+        console.log(error);
+        reject(error);
+      });
+    });
+  };
   
   /*const setDays = days => setState(prev =>({...prev, days}));
 
@@ -136,6 +165,7 @@ export default function Application(props) {
       console.log(error);
     });
   }, []);
+
   //console.log("days", state.days);
   //console.log("appointments", state.appointments);  
   //console.log("interviewers", state.interviewers);
@@ -149,6 +179,7 @@ export default function Application(props) {
       time={item.time}
       interview={interview}
       interviewers={interviewersForDay}
+      bookInterview={bookInterview}
       //{...item}
     />
   });  

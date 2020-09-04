@@ -9,7 +9,6 @@ const Form = props => {
 
   //This is handling youser typing into textbox below
   const handleInput = event => {
-    console.log("handleInput", event.target.value);
     const newName = event.target.value;
     setName(newName)
   };
