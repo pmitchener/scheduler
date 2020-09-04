@@ -94,8 +94,8 @@ export default function Application(props) {
   const [state, setState] = useState({
     day: "Monday",
     days: [],
-    appointments: {},
-    interviewers: {}
+    appointments: [],
+    interviewers: []
   });
 
   const setDay = day => setState({ ...state, day });//spread and overwrite the day key.
@@ -127,8 +127,8 @@ export default function Application(props) {
         {
           ...prev, 
           days: resultsArray[0].data, 
-          appointments: resultsArray[1].data,
-          interviewers: resultsArray[2].data
+          appointments: Object.values(resultsArray[1].data),
+          interviewers: Object.values(resultsArray[2].data)
         }
         ));
     })
@@ -136,9 +136,9 @@ export default function Application(props) {
       console.log(error);
     });
   }, []);
-  //console.log("days", state.days);
-  //console.log("appointments", state.appointments);  
-  //console.log("interviewers", state.interviewers);
+  console.log("days", state.days);
+  console.log("appointments", state.appointments);  
+  console.log("interviewers", state.interviewers);
   const appointmentList = getAppointmentsForDay(state, state.day).map(item => {
     const interview = getInterview(state, item.interview);
     return <Appointment
