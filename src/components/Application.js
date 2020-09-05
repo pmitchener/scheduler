@@ -115,6 +115,7 @@ export default function Application(props) {
       })
       .then(response => {
         //updating state.
+        console.log("http status", response.status)
         const appointments = {
           ...state.appointments,
           [id]: appointment

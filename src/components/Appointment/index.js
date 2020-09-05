@@ -25,6 +25,8 @@ const SAVING = "SAVING";
 const CONFIRM = "CONFIRM";
 const DELETING = "DELETING";
 const ERROR = "ERROR";
+const ERROR_SAVE = "ERROR_SAVE";
+const ERROR_DELETE = "ERROR_DELETE";
 
 const savingMessage = "Saving";
 const deletingMessage = "Deleting";
@@ -64,26 +66,30 @@ const Appointment = props => {
     };
     transition(SAVING);
     props.bookInterview(props.id, interview)
-    .then(result => {
+    .then(() => {
       transition(SHOW);
     })
     .catch(error => {
       //display error dialog here
+      setErrorMessage("Could not save appointment.");
+      transition(ERROR_SAVE, true);
     });
   };  
 
-  const confirmDelete = () => {
+  const confirmCancelInterview 
+   = () => {
     transition(CONFIRM);
   };
-  const deleteInterview = () => {
-    transition(DELETING);
+  const cancelInterview = () => {
+    transition(DELETING, true);
     props.cancelInterview(props.id)
-    .then(result =>{
-      console.log("deleting successfull. Transition to EMPTY mode");
+    .then(() =>{
       transition(EMPTY);
     })
     .catch(error =>{
       //display error dialog here
+      setErrorMessage("Could not cancel appointment.");
+      transition(ERROR_DELETE, true);      
     });
   }
 
@@ -91,7 +97,7 @@ const Appointment = props => {
     <article className="appointment">
       <Header time={props.time} />
         {mode === EMPTY && <Empty onAdd={() => {transition(CREATE)}} />}
-        {mode === ERROR && <Error message={message} onClose={onCloseError} />}
+        {(mode === ERROR  || mode === ERROR_SAVE || mode === ERROR_DELETE) && <Error message={message} onClose={onCloseError} />}
         {mode === CREATE && (
           <Form 
             interviewers={props.interviewers} 
@@ -104,8 +110,8 @@ const Appointment = props => {
         )}
         {mode === CONFIRM && (
             <Confirm
-            message={"Delete the appointment?"}
-            onConfirm={deleteInterview}
+            message={"Are you sure you would like to cancel this appointment?"}
+            onConfirm={cancelInterview}
             onCancel={() => {back()} }          
           />
         )}
@@ -126,7 +132,8 @@ const Appointment = props => {
             student={props.interview.student}
             interviewer={props.interview.interviewer}
             onEdit={edit}
-            onDelete={confirmDelete}
+            onDelete={confirmCancelInterview
+            }
           />
         )}
     </article>    
