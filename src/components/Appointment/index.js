@@ -20,6 +20,7 @@ import useVisualMode from "../../hooks/useVisualMode";
 const EMPTY = "EMPTY";
 const SHOW = "SHOW";
 const CREATE = "CREATE";
+const EDIT = "EDIT";
 const SAVING = "SAVING";
 const CONFIRM = "CONFIRM";
 const DELETING = "DELETING";
@@ -31,6 +32,7 @@ const deletingMessage = "Deleting";
 const Appointment = props => {
   const {mode, transition, back, message, setErrorMessage} = useVisualMode( props.interview ? SHOW : EMPTY);
   
+  console.log("mode", mode, "Interviewer", props.interview ? props.interview.interviewer : "");
   const formDataValid = (name, interviewer) => {
     if (!name) {
       setErrorMessage("Please include a student name");
@@ -46,6 +48,10 @@ const Appointment = props => {
   const onCloseError = () => {
     back();
   };
+
+  const edit = () => {
+    transition(EDIT);
+  }
 
   const save = (name, interviewer) => {
     if (!formDataValid(name, interviewer) ) {
@@ -105,11 +111,21 @@ const Appointment = props => {
         )}
         {mode === DELETING && (
           <Status message={deletingMessage} />
-        )}        
+        )}  
+        {mode === EDIT && (
+            <Form
+              name={props.interview.student}
+              interviewers={props.interviewers}
+              interviewer={props.interview.interviewer.id}
+              onCancel={() => {back()}}
+              onSave={save}
+          />          
+        )}      
         {mode === SHOW && (
           <Show
             student={props.interview.student}
             interviewer={props.interview.interviewer}
+            onEdit={edit}
             onDelete={confirmDelete}
           />
         )}
