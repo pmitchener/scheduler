@@ -1,5 +1,4 @@
 
-
 export function getAppointmentsForDay(state, day) {
   const dayObj = state.days.find(item => {
     return item.name === day && item;
@@ -36,4 +35,16 @@ export function getInterview(state, interview) {
     return null;
   }
   return {student: interview.student, interviewer: state.interviewers[interview.interviewer]};
+}
+
+export function getAppointmentSposForDay(state, day) {
+  const dayObj = state.days.find(item => {
+    return item.name === day && item;
+  });
+  if (!dayObj) {
+    return 0;
+  }
+  const spots = dayObj.appointments.filter(id => state.appointments[id].interview === null)
+  .reduce((count, el) => count + 1, 0);//give reduce an initial value to start with or it will start at index 1 instead of index 0;
+  return spots;
 }
