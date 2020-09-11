@@ -2,7 +2,6 @@ import React from "react";
 
 import { 
   render, 
-  prettyDOM, 
   cleanup, 
   waitForElement, 
   fireEvent, 
