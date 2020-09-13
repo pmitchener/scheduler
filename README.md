@@ -21,3 +21,7 @@ npm test
 ```sh
 npm run storybook
 ```
+## Some screenshots
+!["Adding appointment"](https://github.com/pmitchener/scheduler/blob/master/docs/addingAppointment.png)
+!["Delete appointment"](https://github.com/pmitchener/scheduler/blob/master/docs/deleteAppointment.png)
+!["Edit appointment"](https://github.com/pmitchener/scheduler/blob/master/docs/editAppointment.png)
