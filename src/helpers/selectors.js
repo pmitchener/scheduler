@@ -26,8 +26,8 @@ export function getInterviewersForDay(state, day) {
 }
 
 /**
- * 
- * @param {*} state 
+ *
+ * @param {*} state
  * @param {*} interview {"student": "Archie Cohen", "interviewer": 4}
  */
 export function getInterview(state, interview) {
@@ -45,6 +45,6 @@ export function getAppointmentSposForDay(state, day) {
     return 0;
   }
   const spots = dayObj.appointments.filter(id => state.appointments[id].interview === null)
-  .reduce((count, el) => count + 1, 0);//give reduce an initial value to start with or it will start at index 1 instead of index 0;
+    .reduce((count, el) => count + 1, 0);//give reduce an initial value to start with or it will start at index 1 instead of index 0;
   return spots;
 }

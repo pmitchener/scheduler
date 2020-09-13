@@ -9,17 +9,17 @@ const InterviewerList = props => {
     interviewers: PropTypes.array.isRequired
   };
   const interviewerList = props.interviewers.map(interviewer => {
-    return <InterviewerListItem 
-      key={interviewer.id} 
-      {...interviewer} 
-      selected={interviewer.id === props.value} 
-      onChange={event => props.onChange(interviewer.id)}  /> //setInterviewer={event => props.setInterviewer(interviewer.id)}
+    return <InterviewerListItem
+      key={interviewer.id}
+      {...interviewer}
+      selected={interviewer.id === props.value}
+      onChange={event => props.onChange(interviewer.id)}  />;
   });
-  return(
+  return (
     <section className="interviewers">
       <h4 className="interviewers__header text--light">Interviewer</h4>
       <ul className="interviewers__list">{interviewerList}</ul>
-    </section>    
+    </section>
   );
 };
 

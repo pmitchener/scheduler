@@ -16,20 +16,18 @@ const Form = props => {
 
   //this is handling user click InterviewerListItem from the InterviewerList.
   const onChange = id => {
-    //console.log("onChange in Form", id);
     setInterviewer(id);
   };
 
   const reset = () => {
-    //console.log("Form.reset() called.");
     setName("");
     setError("");
     setInterviewer(null);
   };
 
   const cancel = () => {
-     props.onCancel();
-     reset();
+    props.onCancel();
+    reset();
   };
 
   const validate = () => {
@@ -37,11 +35,7 @@ const Form = props => {
       setError("Student name cannot be blank");
       return false;
     }
-/*     if(interviewer === null) {
-      setError("Please select an interviewer");
-      return false;
-    } */
-    return true;//props.onSave(name, interviewer);
+    return true;
   };
 
   const save = () => {
@@ -50,7 +44,7 @@ const Form = props => {
       props.onSave(...[name, interviewer]);
     }
   };
-  return(
+  return (
     <main className="appointment__card appointment__card--create">
       <section className="appointment__card-left">
         <form autoComplete="off" onSubmit={event => event.preventDefault()}>
@@ -62,8 +56,8 @@ const Form = props => {
             /*
               This must be a controlled component
             */
-           value={name}
-           onChange={handleInput}
+            value={name}
+            onChange={handleInput}
           />
         </form>
         <section className="appointment__validation">{error}</section>
@@ -75,8 +69,8 @@ const Form = props => {
           <Button confirm onClick={save}>Save</Button>
         </section>
       </section>
-    </main>    
-  );  
+    </main>
+  );
 };
 
 export default Form;

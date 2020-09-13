@@ -31,7 +31,7 @@ const state = {
     }
   },
   interviewers: {
-    "1": {  
+    "1": {
       "id": 1,
       "name": "Sylvia Palmer",
       "avatar": "https://i.imgur.com/LpaY82x.png"
@@ -55,8 +55,8 @@ const state = {
       "id": 5,
       "name": "Sven Jones",
       "avatar": "https://i.imgur.com/twYrpay.jpg"
-    }    
-  }  
+    }
+  }
 };
 
 test("getAppointmentsForDay returns an array", () => {
@@ -85,7 +85,7 @@ test("getAppointmentsForDay returns an empty array when the day is not found", (
   expect(result.length).toEqual(0);
 });
 
-//Interviewers test 
+//Interviewers test
 test("getInterviewersForDay returns an array", () => {
   const result = getInterviewersForDay(state, "Monday");
   expect(Array.isArray(result)).toBe(true);

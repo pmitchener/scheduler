@@ -2,10 +2,6 @@ import { renderHook, act } from "@testing-library/react-hooks";
 
 import useVisualMode from "hooks/useVisualMode";
 
-//import { render, cleanup } from "@testing-library/react";
-
-//afterEach(cleanup);
-
 const FIRST = "FIRST";
 const SECOND = "SECOND";
 const THIRD = "THIRD";

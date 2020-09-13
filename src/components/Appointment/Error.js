@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Error = props => {
-  return(
+  return (
     <main className="appointment__card appointment__card--error">
       <section className="appointment__error-message">
         <h1 className="text--semi-bold">Error</h1>
@@ -12,7 +12,7 @@ const Error = props => {
         src="images/close.png"
         alt="Close"
       />
-    </main>    
+    </main>
   );
 };
 
