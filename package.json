@@ -49,7 +49,7 @@
     "prop-types": "^15.7.2",
     "react-test-renderer": "^16.13.1"
   },
-  "jest": {
+  "jest": {  
     "watchPathIgnorePatterns": [
       "<rootDir>/node_modules/",
       "<rootDir>/.git/"

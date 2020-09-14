@@ -1,4 +1,7 @@
 # Interview Scheduler
+A React application that allows you to book and cancel interviews.
+This App is combined with a WebSocket server to achieve a realtime experience 
+of booking, updating, and canceling interviews.
 
 ## Setup
 
