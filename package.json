@@ -6,7 +6,7 @@
     "axios": "^0.20.0",
     "classnames": "^2.2.6",
     "normalize.css": "^8.0.1",
-    
+    "proxy": "https://scheduler-pm-api.herokuapp.com",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-scripts": "3.0.0"
@@ -58,8 +58,5 @@
       "src/**/*.js",
       "!src/index.js"
     ]
-  },
-  "comments": {
-    "proxy": "https://scheduler-pm-api.herokuapp.com"
   }
 }
