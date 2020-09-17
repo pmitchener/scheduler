@@ -3,7 +3,6 @@ import axios from 'axios';
 import reducer, {SET_DAY, SET_APPLICATION_DATA, SET_INTERVIEW, SET_SPOTS_REMAINING} from '../reducers/application';
 
 axios.defaults.baseURL = process.env.REACT_APP_API_URL;
-
 function useApplicationData() {
   const [state, dispatch] = useReducer(reducer, {
     day: "Monday",
